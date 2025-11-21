@@ -8,6 +8,7 @@
   --neon-blue: #00f2ff;
   --neon-pink: #ff0055;
   --neon-green: #4ade80;
+  --neon-purple: #bd00ff;
   --text-color: #ffffff;
 }
 
@@ -144,31 +145,55 @@ body {
   box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
 }
 
-/* --- Button --- */
-.reset-btn {
-  background: linear-gradient(135deg, var(--neon-blue) 0%, #0099ff 100%);
+/* --- Buttons --- */
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn {
   border: none;
-  padding: 14px 36px;
+  padding: 12px 24px;
   color: #0f172a;
   font-weight: bold;
   font-family: "Orbitron", sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   border-radius: 50px;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
   outline: none;
+  flex: 1;
+}
+
+.reset-btn {
+  background: linear-gradient(135deg, var(--neon-blue) 0%, #0099ff 100%);
+  box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
 }
 
 .reset-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
+  box-shadow: 0 0 25px rgba(0, 242, 255, 0.6);
+  transform: translateY(-2px);
 }
 
-.reset-btn:active {
-  transform: scale(0.95);
+.mode-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+.mode-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.mode-btn.active {
+  background: var(--neon-purple);
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 15px rgba(189, 0, 255, 0.4);
 }
 
 /* --- Animations --- */
@@ -231,5 +256,8 @@ body {
   }
   .grid {
     gap: 8px;
+  }
+  .controls {
+    flex-direction: column;
   }
 }
