@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://modern-tic-tac-toe.vercel.app/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 0
+
+# Disallow specific paths (if any)
+# Disallow: /private/

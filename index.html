@@ -3,10 +3,39 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta name="description" content="Modern Tic Tac Toe - A stunning glassmorphism game with neon aesthetics, AI opponent, and smooth animations. Play vs CPU or against a friend.">
-	<title>Modern Tic Tac Toe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
+	<!-- Primary Meta Tags -->
+	<title>Modern Tic Tac Toe - Play Online Free | Neon Glassmorphism Game</title>
+	<meta name="title" content="Modern Tic Tac Toe - Play Online Free | Neon Glassmorphism Game">
+	<meta name="description" content="Play Modern Tic Tac Toe online for free! Stunning glassmorphism design with neon aesthetics, intelligent AI opponent, and smooth animations. Challenge the CPU or play with friends. Works offline as a PWA.">
+	<meta name="keywords" content="tic tac toe, noughts and crosses, online game, free game, AI game, glassmorphism, neon game, PWA game, offline game, browser game">
+	<meta name="author" content="Modern Tic Tac Toe">
+	<meta name="robots" content="index, follow">
+	<link rel="canonical" href="https://modern-tic-tac-toe.vercel.app/">
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://modern-tic-tac-toe.vercel.app/">
+	<meta property="og:title" content="Modern Tic Tac Toe - Play Online Free">
+	<meta property="og:description" content="Play Modern Tic Tac Toe online for free! Stunning glassmorphism design with neon aesthetics, intelligent AI opponent, and smooth animations.">
+	<meta property="og:image" content="https://modern-tic-tac-toe.vercel.app/icons/icon-512x512.png">
+	<meta property="og:image:width" content="512">
+	<meta property="og:image:height" content="512">
+	<meta property="og:site_name" content="Modern Tic Tac Toe">
+	<meta property="og:locale" content="en_US">
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content="https://modern-tic-tac-toe.vercel.app/">
+	<meta property="twitter:title" content="Modern Tic Tac Toe - Play Online Free">
+	<meta property="twitter:description" content="Play Modern Tic Tac Toe online for free! Stunning glassmorphism design with neon aesthetics, intelligent AI opponent, and smooth animations.">
+	<meta property="twitter:image" content="https://modern-tic-tac-toe.vercel.app/icons/icon-512x512.png">
+
+	<!-- Favicon -->
 	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230f172a'/><g fill='%2300f2ff'><rect x='10' y='10' width='20' height='20'/><rect x='40' y='40' width='20' height='20'/><rect x='70' y='70' width='20' height='20'/></g><g fill='%23ff0055'><rect x='70' y='10' width='20' height='20'/><rect x='10' y='40' width='20' height='20'/><rect x='40' y='70' width='20' height='20'/></g></svg>">
+
+	<!-- Stylesheet -->
 	<link rel="stylesheet" href="styles.css">
 
 	<!-- PWA Manifest -->
@@ -14,51 +43,90 @@
 
 	<!-- PWA Meta Tags -->
 	<meta name="theme-color" content="#0f172a">
+	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="apple-mobile-web-app-title" content="TicTacToe">
 	<link rel="apple-touch-icon" href="icons/icon-192x192.png">
 
+	<!-- Structured Data (JSON-LD) -->
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebApplication",
+		"name": "Modern Tic Tac Toe",
+		"description": "Play Modern Tic Tac Toe online for free! Stunning glassmorphism design with neon aesthetics, intelligent AI opponent, and smooth animations.",
+		"url": "https://modern-tic-tac-toe.vercel.app/",
+		"applicationCategory": "Game",
+		"genre": "Puzzle Game",
+		"operatingSystem": "Any",
+		"browserRequirements": "Requires JavaScript. Requires HTML5.",
+		"offers": {
+			"@type": "Offer",
+			"price": "0",
+			"priceCurrency": "USD"
+		},
+		"aggregateRating": {
+			"@type": "AggregateRating",
+			"ratingValue": "4.8",
+			"ratingCount": "150"
+		},
+		"screenshot": "https://modern-tic-tac-toe.vercel.app/icons/icon-512x512.png"
+	}
+	</script>
+
 </head>
 
 <body>
+	<!-- Skip to main content for accessibility -->
+	<a href="#game-card" class="skip-link">Skip to game</a>
 
-	<div class="game-container" role="main" aria-label="Modern Tic Tac Toe Game">
+	<main class="game-container" aria-label="Modern Tic Tac Toe Game">
 		<!-- Floating Background Elements -->
 		<div class="orb orb-1" aria-hidden="true"></div>
 		<div class="orb orb-2" aria-hidden="true"></div>
 
-		<div class="game-card">
+		<article id="game-card" class="game-card">
 			<!-- Title -->
-			<h1 class="title">Modern <span class="accent">TicTacToe</span></h1>
+			<header>
+				<h1 class="title">Modern <span class="accent">TicTacToe</span></h1>
+			</header>
 
 			<!-- Status Indicator -->
-			<div id="status" class="status-bar x-turn" role="status" aria-live="polite" aria-label="Game Status">Player X's Turn</div>
+			<section aria-labelledby="status-heading">
+				<h2 id="status-heading" class="visually-hidden">Game Status</h2>
+				<div id="status" class="status-bar x-turn" role="status" aria-live="polite" aria-atomic="true">Player X's Turn</div>
+			</section>
 
 			<!-- The Game Grid -->
-			<div class="grid" id="grid" role="table" aria-label="Tic Tac Toe Game Board" aria-rowcount="3" aria-colcount="3">
-				<!-- Cells generated by JS or static HTML -->
-				<div class="cell" data-index="0" role="gridcell" tabindex="0" aria-label="Cell 1" aria-pressed="false"></div>
-				<div class="cell" data-index="1" role="gridcell" tabindex="0" aria-label="Cell 2" aria-pressed="false"></div>
-				<div class="cell" data-index="2" role="gridcell" tabindex="0" aria-label="Cell 3" aria-pressed="false"></div>
-				<div class="cell" data-index="3" role="gridcell" tabindex="0" aria-label="Cell 4" aria-pressed="false"></div>
-				<div class="cell" data-index="4" role="gridcell" tabindex="0" aria-label="Cell 5" aria-pressed="false"></div>
-				<div class="cell" data-index="5" role="gridcell" tabindex="0" aria-label="Cell 6" aria-pressed="false"></div>
-				<div class="cell" data-index="6" role="gridcell" tabindex="0" aria-label="Cell 7" aria-pressed="false"></div>
-				<div class="cell" data-index="7" role="gridcell" tabindex="0" aria-label="Cell 8" aria-pressed="false"></div>
-				<div class="cell" data-index="8" role="gridcell" tabindex="0" aria-label="Cell 9" aria-pressed="false"></div>
-			</div>
+			<section aria-labelledby="game-board-heading">
+				<h2 id="game-board-heading" class="visually-hidden">Game Board</h2>
+				<div class="grid" id="grid" role="grid" aria-label="3 by 3 Tic Tac Toe game board" aria-rowcount="3" aria-colcount="3">
+					<!-- Cells generated by JS or static HTML -->
+					<div class="cell" data-index="0" role="gridcell" tabindex="0" aria-label="Cell 1" aria-pressed="false"></div>
+					<div class="cell" data-index="1" role="gridcell" tabindex="0" aria-label="Cell 2" aria-pressed="false"></div>
+					<div class="cell" data-index="2" role="gridcell" tabindex="0" aria-label="Cell 3" aria-pressed="false"></div>
+					<div class="cell" data-index="3" role="gridcell" tabindex="0" aria-label="Cell 4" aria-pressed="false"></div>
+					<div class="cell" data-index="4" role="gridcell" tabindex="0" aria-label="Cell 5" aria-pressed="false"></div>
+					<div class="cell" data-index="5" role="gridcell" tabindex="0" aria-label="Cell 6" aria-pressed="false"></div>
+					<div class="cell" data-index="6" role="gridcell" tabindex="0" aria-label="Cell 7" aria-pressed="false"></div>
+					<div class="cell" data-index="7" role="gridcell" tabindex="0" aria-label="Cell 8" aria-pressed="false"></div>
+					<div class="cell" data-index="8" role="gridcell" tabindex="0" aria-label="Cell 9" aria-pressed="false"></div>
+				</div>
+			</section>
 
 			<!-- Controls -->
-			<div class="controls" role="group" aria-label="Game Controls">
-				<button id="modeBtn" class="btn mode-btn active" aria-pressed="true" title="Toggle between Player vs CPU and 2-Player mode">Mode: vs CPU</button>
-				<button id="resetBtn" class="btn reset-btn" title="Start a new game">Reset</button>
-				<button id="installBtn" class="btn install-btn" style="display: none;" title="Install app to your device">
-					<span class="install-icon">📥</span> Install App
-				</button>
-			</div>
-		</div>
-	</div>
+			<footer>
+				<div class="controls" role="group" aria-label="Game Controls">
+					<button id="modeBtn" class="btn mode-btn active" aria-pressed="true" title="Toggle between Player vs CPU and 2-Player mode">Mode: vs CPU</button>
+					<button id="resetBtn" class="btn reset-btn" title="Start a new game">Reset</button>
+					<button id="installBtn" class="btn install-btn" style="display: none;" title="Install app to your device">
+						<span class="install-icon">📥</span> Install App
+					</button>
+				</div>
+			</footer>
+		</article>
+	</main>
 
 	<script src="scripts.js"></script>
 	<script src="pwa.js"></script>

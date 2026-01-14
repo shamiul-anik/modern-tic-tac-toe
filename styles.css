@@ -32,6 +32,36 @@ body {
   overflow: hidden;
 }
 
+/* --- Accessibility Utilities --- */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--neon-blue);
+  color: var(--bg-color);
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 100;
+  border-radius: 0 0 8px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 /* --- Glass Card --- */
 .game-card {
   position: relative;
