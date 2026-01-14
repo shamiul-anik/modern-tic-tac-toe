@@ -196,6 +196,30 @@ body {
   box-shadow: 0 0 15px rgba(189, 0, 255, 0.4);
 }
 
+/* --- Install Button (PWA) --- */
+.install-btn {
+  background: linear-gradient(135deg, #00f2ff 0%, #0099ff 100%);
+  color: #0f172a;
+  font-weight: 600;
+  box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+}
+
+.install-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 242, 255, 0.5);
+}
+
+.install-btn .install-icon {
+  font-size: 1.2em;
+  margin-right: 0.3em;
+  display: inline-block;
+}
+
+/* Hide install button when not available */
+.install-btn[style*="display: none"] {
+  display: none !important;
+}
+
 /* --- Animations --- */
 @keyframes pop-in {
   0% {

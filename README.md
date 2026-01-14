@@ -5,23 +5,27 @@ A stunning, modern take on the classic Tic Tac Toe game with glassmorphism UI, n
 ## Key Features
 
 ### 🎨 Glassmorphism UI
+
 - Semi-transparent backgrounds using `rgba` for a frosted glass effect
 - Smooth background blur with `backdrop-filter` for modern aesthetics
 - Subtle borders and layered depth create a floating, premium feel
 
 ### ✨ Neon Aesthetics
+
 - **Cyan X marks** with glowing text-shadow for striking visibility
 - **Pink O marks** with matching neon glow effect
 - CSS gradients create a vibrant, eye-catching design
 - Dark background with gradient overlay enhances the neon pop
 
 ### 🎬 Reactive Animations
+
 - **Pop-in Effect**: Marks scale up and rotate dynamically as they're placed
 - **Floating Orbs**: Pure CSS background animations add subtle movement and life to empty space without distracting from gameplay
 - **Hover States**: Cells lift up slightly and brighten on hover for interactive feedback
 - Smooth transitions throughout the entire interface
 
 ### 🧠 Smart Game Logic
+
 - **Instant Winner Detection**: Calculates the winner immediately upon winning move
 - **Winning Cell Highlighting**: Highlights the three winning cells in glowing green
 - **Draw Detection**: Automatically identifies and announces draws
@@ -32,9 +36,18 @@ A stunning, modern take on the classic Tic Tac Toe game with glassmorphism UI, n
   - Priority 4: Random move selection
 
 ### 🎮 Game Modes
+
 - **Player vs CPU**: Challenge an intelligent computer opponent with strategic gameplay
 - **2-Player Mode**: Play locally with a friend on the same device
 - Easy mode toggle to switch between game modes mid-session
+
+### 📱 Progressive Web App (PWA)
+
+- **Installable**: Add to home screen on mobile and desktop devices
+- **Offline Support**: Play without internet connection after first load
+- **One-Click Install**: Prominent install button in the UI for easy installation
+- **App-Like Experience**: Runs in standalone mode without browser UI
+- **Fast Loading**: Instant loading after first visit with cached resources
 
 ## Technologies Used
 
@@ -49,6 +62,10 @@ A stunning, modern take on the classic Tic Tac Toe game with glassmorphism UI, n
   - Game state management
   - DOM manipulation
   - AI logic with strategic priorities
+- **PWA Features**:
+  - Web App Manifest for installability
+  - Service Worker for offline support and caching
+  - Install prompt handling for easy installation
 
 ## Getting Started
 
@@ -65,6 +82,7 @@ Simply open `index.html` in your web browser. No installation or build process r
 ## Browser Compatibility
 
 Works on all modern browsers including:
+
 - Chrome/Chromium
 - Firefox
 - Safari

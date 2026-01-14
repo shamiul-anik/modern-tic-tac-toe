@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe Icon Generator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #00f2ff 0%, #ff0055 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 2rem;
+    }
+
+    .description {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .preview-item {
+      text-align: center;
+    }
+
+    .preview-item canvas {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      background: #0f172a;
+      box-shadow: 0 4px 15px rgba(0, 242, 255, 0.2);
+    }
+
+    .preview-item p {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, #00f2ff 0%, #0099ff 100%);
+      color: #0f172a;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 242, 255, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .status {
+      text-align: center;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      background: rgba(0, 242, 255, 0.1);
+      display: none;
+    }
+
+    .status.show {
+      display: block;
+    }
+
+    .instructions {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      border-left: 4px solid #00f2ff;
+    }
+
+    .instructions h3 {
+      margin-bottom: 1rem;
+      color: #00f2ff;
+    }
+
+    .instructions ol {
+      margin-left: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .instructions code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      color: #ff0055;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🎮 Tic Tac Toe Icon Generator</h1>
+    <p class="description">Generate all PWA icons with neon aesthetic for your Modern Tic Tac Toe game</p>
+
+    <div class="preview-grid" id="previewGrid"></div>
+
+    <div class="button-group">
+      <button onclick="generateIcons()">Generate Icons</button>
+      <button onclick="downloadAllIcons()">Download All Icons</button>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <div class="instructions">
+      <h3>📋 Instructions</h3>
+      <ol>
+        <li>Click <strong>"Generate Icons"</strong> to create all icon sizes</li>
+        <li>Review the previews above to ensure they look correct</li>
+        <li>Click <strong>"Download All Icons"</strong> to save all icons</li>
+        <li>Create a folder named <code>icons</code> in your project root</li>
+        <li>Extract all downloaded PNG files into the <code>icons/</code> folder</li>
+        <li>Verify the icons are in place: <code>icons/icon-72x72.png</code>, etc.</li>
+      </ol>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script>
+    const iconSizes = [72, 96, 128, 144, 152, 192, 384, 512];
+    const canvases = {};
+
+    function drawIcon(canvas, size) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = size;
+      canvas.height = size;
+
+      // Background
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, size, size);
+
+      // Calculate sizes based on icon size
+      const padding = size * 0.15;
+      const gridSize = size - (padding * 2);
+      const cellSize = gridSize / 3;
+      const lineWidth = size * 0.02;
+      const markSize = cellSize * 0.6;
+
+      // Draw grid lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.lineWidth = lineWidth;
+
+      // Vertical lines
+      for (let i = 1; i < 3; i++) {
+        ctx.beginPath();
+        ctx.moveTo(padding + (cellSize * i), padding);
+        ctx.lineTo(padding + (cellSize * i), padding + gridSize);
+        ctx.stroke();
+      }
+
+      // Horizontal lines
+      for (let i = 1; i < 3; i++) {
+        ctx.beginPath();
+        ctx.moveTo(padding, padding + (cellSize * i));
+        ctx.lineTo(padding + gridSize, padding + (cellSize * i));
+        ctx.stroke();
+      }
+
+      // Draw X (cyan, top-left)
+      const x1 = padding + cellSize * 0.5;
+      const y1 = padding + cellSize * 0.5;
+      drawX(ctx, x1, y1, markSize, size);
+
+      // Draw O (pink, center)
+      const x2 = padding + cellSize * 1.5;
+      const y2 = padding + cellSize * 1.5;
+      drawO(ctx, x2, y2, markSize * 0.5, size);
+
+      // Draw X (cyan, bottom-right)
+      const x3 = padding + cellSize * 2.5;
+      const y3 = padding + cellSize * 2.5;
+      drawX(ctx, x3, y3, markSize, size);
+    }
+
+    function drawX(ctx, centerX, centerY, size, iconSize) {
+      const halfSize = size / 2;
+      const lineWidth = iconSize * 0.04;
+
+      ctx.strokeStyle = '#00f2ff';
+      ctx.lineWidth = lineWidth;
+      ctx.lineCap = 'round';
+      ctx.shadowColor = '#00f2ff';
+      ctx.shadowBlur = iconSize * 0.05;
+
+      // Draw X
+      ctx.beginPath();
+      ctx.moveTo(centerX - halfSize, centerY - halfSize);
+      ctx.lineTo(centerX + halfSize, centerY + halfSize);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(centerX + halfSize, centerY - halfSize);
+      ctx.lineTo(centerX - halfSize, centerY + halfSize);
+      ctx.stroke();
+
+      // Reset shadow
+      ctx.shadowBlur = 0;
+    }
+
+    function drawO(ctx, centerX, centerY, radius, iconSize) {
+      const lineWidth = iconSize * 0.04;
+
+      ctx.strokeStyle = '#ff0055';
+      ctx.lineWidth = lineWidth;
+      ctx.shadowColor = '#ff0055';
+      ctx.shadowBlur = iconSize * 0.05;
+
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Reset shadow
+      ctx.shadowBlur = 0;
+    }
+
+    function generateIcons() {
+      const previewGrid = document.getElementById('previewGrid');
+      previewGrid.innerHTML = '';
+
+      iconSizes.forEach(size => {
+        const canvas = document.createElement('canvas');
+        drawIcon(canvas, size);
+        canvases[size] = canvas;
+
+        const previewItem = document.createElement('div');
+        previewItem.className = 'preview-item';
+        previewItem.innerHTML = `
+          ${canvas.outerHTML}
+          <p>${size}x${size}px</p>
+        `;
+        previewGrid.appendChild(previewItem);
+      });
+
+      showStatus('✓ Icons generated successfully!', 'success');
+    }
+
+    async function downloadAllIcons() {
+      if (Object.keys(canvases).length === 0) {
+        showStatus('⚠ Please generate icons first!', 'warning');
+        return;
+      }
+
+      showStatus('📦 Preparing download...', 'info');
+
+      const zip = new JSZip();
+      const iconsFolder = zip.folder('icons');
+
+      // Convert each canvas to blob and add to zip
+      const promises = iconSizes.map(async (size) => {
+        const canvas = canvases[size];
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        iconsFolder.file(`icon-${size}x${size}.png`, blob);
+      });
+
+      await Promise.all(promises);
+
+      // Generate and download zip
+      const content = await zip.generateAsync({ type: 'blob' });
+      const url = URL.createObjectURL(content);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'tic-tac-toe-icons.zip';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      showStatus('✓ Icons downloaded! Extract to icons/ folder in your project.', 'success');
+    }
+
+    function showStatus(message, type) {
+      const status = document.getElementById('status');
+      status.textContent = message;
+      status.className = 'status show';
+
+      if (type === 'success') {
+        status.style.background = 'rgba(0, 255, 136, 0.2)';
+        status.style.borderLeft = '4px solid #00ff88';
+      } else if (type === 'warning') {
+        status.style.background = 'rgba(255, 165, 0, 0.2)';
+        status.style.borderLeft = '4px solid #ffa500';
+      } else {
+        status.style.background = 'rgba(0, 242, 255, 0.2)';
+        status.style.borderLeft = '4px solid #00f2ff';
+      }
+    }
+
+    // Auto-generate on load
+    window.addEventListener('load', generateIcons);
+  </script>
+</body>
+
+</html>
