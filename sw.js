@@ -66,13 +66,18 @@ self.addEventListener("fetch", (event) => {
       // Clone the request
       const fetchRequest = event.request.clone();
 
+      // Only cache valid HTTP(S) requests
+      // This prevents errors with chrome-extension:// and other non-standard schemes
+      const isHttp = event.request.url.startsWith("http");
+
       return fetch(fetchRequest)
         .then((response) => {
           // Check if valid response
           if (
             !response ||
             response.status !== 200 ||
-            response.type !== "basic"
+            response.type !== "basic" ||
+            !isHttp
           ) {
             return response;
           }

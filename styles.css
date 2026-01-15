@@ -228,6 +228,8 @@ body {
 
 /* --- Install Button (PWA) --- */
 .install-btn {
+  display: block;
+  width: 100%;
   background: linear-gradient(135deg, #00f2ff 0%, #0099ff 100%);
   color: #0f172a;
   font-weight: 600;

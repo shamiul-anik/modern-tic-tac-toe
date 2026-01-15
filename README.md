@@ -49,23 +49,33 @@ A stunning, modern take on the classic Tic Tac Toe game with glassmorphism UI, n
 - **App-Like Experience**: Runs in standalone mode without browser UI
 - **Fast Loading**: Instant loading after first visit with cached resources
 
-## Technologies Used
+## 💻 Technology Stack
 
-- **HTML5**: Semantic markup with accessibility features
-- **CSS3**: Modern features including:
-  - Glassmorphism effects
-  - CSS Grid for responsive layout
-  - CSS Animations and transitions
-  - CSS Custom Properties (variables)
-  - Responsive media queries
-- **Vanilla JavaScript**: Pure JS implementation without frameworks
-  - Game state management
-  - DOM manipulation
-  - AI logic with strategic priorities
-- **PWA Features**:
-  - Web App Manifest for installability
-  - Service Worker for offline support and caching
-  - Install prompt handling for easy installation
+| Category     | Technologies                                            |
+| :----------- | :------------------------------------------------------ |
+| **Frontend** | HTML5, CSS3, Vanilla JavaScript                         |
+| **Styling**  | Glassmorphism, Neon Aesthetics, CSS Grid/Flexbox        |
+| **PWA**      | Service Workers, Web App Manifest, Cache API            |
+| **SEO**      | Meta Tags, Open Graph, JSON-LD, Robots.txt, Sitemap.xml |
+| **Hosting**  | Vercel                                                  |
+
+## 📁 Project Structure
+
+```text
+modern-tic-tac-toe/
+├── icons/              # PWA app icons (72x72 to 512x512)
+├── docs/               # Documentation and guides
+├── index.html          # Main application entry point
+├── styles.css          # Modern neon glassmorphism styles
+├── scripts.js          # Core game logic and AI opponent
+├── pwa.js              # PWA initialization and install handling
+├── sw.js               # Service Worker for offline support
+├── manifest.json       # Web App Manifest for installability
+├── vercel.json         # Vercel deployment configuration
+├── robots.txt          # Search engine crawler configuration
+├── sitemap.xml         # SEO sitemap
+└── icon-generator.html # Helper tool for generating PWA icons
+```
 
 ## Getting Started
 
